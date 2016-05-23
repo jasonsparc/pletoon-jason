@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Mostly borrowed from android samples via "template-dimens.xml" resource.
+	See, https://developer.android.com/samples/index.html
+-->
+<resources>
+
+	<!-- Semantic definitions -->
+
+	<dimen name="horizontal_page_margin">@dimen/margin_very_huge</dimen>
+	<dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
+
+</resources>

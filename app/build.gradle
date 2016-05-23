@@ -1,0 +1,155 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda' // IMPORTANT: Must apply this plugin *last*
+
+android {
+	compileSdkVersion 23
+	buildToolsVersion "23.0.2"
+
+	defaultConfig {
+		applicationId "com.jasonsparc.pletoon"
+		minSdkVersion 15
+		targetSdkVersion 22 // We're not yet prepared for Marshmallow (API 23)
+		versionCode 1
+		versionName "1.0"
+
+		/*** Additional build options ***/
+
+		/**
+		 * Disables limited support for vector drawables which generates pngs at build time.
+		 * Uses `support-vector-drawable` and `animated-vector-drawable` library instead.
+		 *
+		 * http://android-developers.blogspot.com/2016/02/android-support-library-232.html
+		 */
+		vectorDrawables.useSupportLibrary = true
+	}
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
+
+	/*** Additional build options ***/
+
+	dataBinding { enabled = true }
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+
+	lintOptions {
+		// Prevents errors when compiling with `retrolambda` in release
+		checkReleaseBuilds false
+	}
+}
+
+retrolambda {
+	jdk System.getenv("JAVA8_HOME")
+	oldJdk System.getenv("JAVA7_HOME")
+//  defaultMethods false
+	incremental false
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	testCompile 'junit:junit:4.12'
+
+	// *** Notice Me: Document Conventions ***
+	//
+	// Some line comments (i.e. `// ...`) divide dependencies into sections.
+	// Let's name them, "dependency separators"
+	// Dependency separators briefly describes a dependency and may provide links.
+	//
+	// Long comments (i.e. `/* ... */`) are notes that can be placed inside sections of dependencies.
+	// Long comments are part of the bigger section they document. They are not dependency separators.
+	//
+	// *** * ***
+
+	// Android Support Libraries
+	compile('com.android.support:support-v4:23.3.0') {
+		// in case of versions conflict '23.2.1' version of support-v4 wins:
+		force = true // this avoids referencing the unstable '24.0.0-alpha1' version of support-v4
+	}
+	compile 'com.android.support:design:23.3.0'
+	compile 'com.android.support:cardview-v7:23.3.0'
+	compile 'com.android.support:recyclerview-v7:23.3.0'
+	compile 'com.android.support:percent:23.3.0'
+
+	// Architecture Support
+	// Okio, https://github.com/square/okio
+	compile 'com.squareup.okio:okio:1.6.0'
+	// Navi, https://github.com/trello/navi/
+	compile 'com.trello:navi:0.2.0'
+	// RxJava, http://github.com/ReactiveX/RxJava
+	compile 'io.reactivex:rxjava:1.1.5'
+	/* https://github.com/artem-zinnatullin/RxJavaProGuardRules */
+	compile 'com.artemzin.rxjava:proguard-rules:1.1.5.0'
+	// RxAndroid, https://github.com/ReactiveX/RxAndroid
+	compile 'io.reactivex:rxandroid:1.1.0'
+	// RxBinding, https://github.com/JakeWharton/RxBinding
+	compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+	compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
+	compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
+	compile 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
+	compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
+	// RxLifecycle
+	compile 'com.trello:rxlifecycle:0.5.0'
+	/* If you want pre-written Activities and Fragments you can subclass as providers */
+	//compile 'com.trello:rxlifecycle-components:0.4.0'
+	/* If you want to use Navi for providers */
+	compile 'com.trello:rxlifecycle-navi:0.5.0'
+	// SQLBrite, https://github.com/square/sqlbrite
+	compile 'com.squareup.sqlbrite:sqlbrite:0.6.3'
+
+	// Data Model Support
+	// Gson, https://github.com/google/gson
+	compile 'com.google.code.gson:gson:2.6.2'
+	// Google's AutoValue, https://github.com/google/auto/blob/master/value/userguide/index.md
+	provided "com.google.auto.value:auto-value:1.2"
+	apt "com.google.auto.value:auto-value:1.2"
+	// AutoValue: Parcel Extension, https://github.com/rharter/auto-value-parcel
+	apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.1'
+	// AutoValue: Gson Extension, https://github.com/rharter/auto-value-gson
+	apt 'com.ryanharter.auto.value:auto-value-gson:0.3.1'
+	/* Optionally for TypeAdapter support */
+	compile 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.1'
+	// AutoValue: Cursor Extension, https://github.com/gabrielittner/auto-value-cursor
+	apt 'com.gabrielittner.auto.value:auto-value-cursor:0.5.0-SNAPSHOT'
+	/* if you need the @ColumnName or @ColumnAdapter annotations also include this: */
+	compile 'com.gabrielittner.auto.value:auto-value-cursor-annotations:0.5.0-SNAPSHOT'
+
+	// Networking libraries
+	// OkHttp, http://square.github.io/okhttp/
+	compile 'com.squareup.okhttp3:okhttp:3.2.0'
+	compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+	// Retrofit, http://square.github.io/retrofit/
+	compile 'com.squareup.retrofit2:retrofit:2.0.2'
+	compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+	compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+	// Glide, https://github.com/bumptech/glide
+	compile 'com.github.bumptech.glide:glide:3.6.1'
+	compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+
+	// UI libraries
+	// Materialize, https://github.com/mikepenz/Materialize
+	compile "com.mikepenz:materialize:0.8.8@aar"
+	// RoundedImageView, https://github.com/vinc3m1/RoundedImageView
+	compile 'com.makeramen:roundedimageview:2.2.1'
+	// BindingCollectionAdapter, https://github.com/evant/binding-collection-adapter
+	compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.1.0'
+	compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.1.0'
+
+	// Convenience libraries
+	/* Fixes bug in Dagger 2: https://github.com/google/dagger/issues/356#issuecomment-207989795 */
+	apt 'com.google.guava:guava:19.0'
+	// Dagger 2, https://github.com/google/dagger
+	apt 'com.google.dagger:dagger-compiler:2.4'
+	compile 'com.google.dagger:dagger:2.4'
+	/* For Dagger 2: Needed for @Generated annotation (missing in Java <= 1.6, Android) */
+	provided 'javax.annotation:javax.annotation-api:1.2'
+	// Icepick, https://github.com/frankiesardo/icepick
+	compile 'frankiesardo:icepick:3.2.0'
+	provided 'frankiesardo:icepick-processor:3.2.0'
+}

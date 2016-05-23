@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+		<import alias="setup" type="com.jasonsparc.pletoon.app.setup.ItemEpisodeImageStaticSetup" />
+		<variable name="image" type="com.jasonsparc.pletoon.model.Episode.Image" />
+	</data>
+
+	<android.support.percent.PercentFrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/label_not_yet_downloaded"
+			android:layout_width="wrap_content"
+			android:layout_height="92dp"
+			android:layout_gravity="top|center"
+			android:gravity="center"
+			android:paddingLeft="@dimen/margin_medium"
+			android:paddingRight="@dimen/margin_medium"
+			android:text="@string/label_not_yet_downloaded"
+			android:textAppearance="@style/TextAppearance.AppCompat.Title"
+			android:textStyle="bold" />
+
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:adjustViewBounds="true"
+			android:minHeight="92dp"
+			app:imageUrl="@{image.image}"
+			app:onImageLoaded="@{setup.hideEmptyStateView(@id/label_not_yet_downloaded)}" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="top|start"
+			android:alpha="0.5"
+			android:background="@color/colorAccent"
+			android:padding="@dimen/margin_small"
+			android:text="@{String.valueOf(image.order)}"
+			android:textAllCaps="true"
+			android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:text="1" />
+	</android.support.percent.PercentFrameLayout>
+</layout>

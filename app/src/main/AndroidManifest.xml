@@ -1,0 +1,59 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	package="com.jasonsparc.pletoon">
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+	<!--
+		We're gonna follow `http://developer.android.com/guide/topics/data/data-storage.html#AccessingExtFiles`
+
+		Because some customized KitKat phones are broken and still requires WRITE_EXTERNAL_STORAGE
+		permission to read/write on private external app data. Example, my crappy StarMobile device.
+	-->
+	<!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>-->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<application
+		android:name=".core.MainApplication"
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme">
+
+		<!-- Pletoon's Glide Module -->
+		<meta-data
+			android:name="com.jasonsparc.pletoon.client.PletoonGlideModule"
+			android:value="GlideModule" />
+		<!-- We're overriding OkHttp Glide Module's default behavior -->
+		<meta-data
+			android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+			tools:node="remove" />
+
+		<!-- *** Activities *** -->
+
+		<activity
+			android:name=".app.AllComicsActivity"
+			android:label="@string/home_activity_label"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name=".app.ComicActivity"
+			android:screenOrientation="portrait">
+		</activity>
+
+		<!-- *** Services *** -->
+
+		<!-- Nothing so far. -->
+
+	</application>
+
+</manifest>

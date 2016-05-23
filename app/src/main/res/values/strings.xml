@@ -1,0 +1,27 @@
+<resources>
+	<string name="app_name">Pletoon - Jason</string>
+
+	<string name="label_image_not_yet_downloaded">Image not yet downloaded</string>
+	<string name="label_not_yet_downloaded">Not yet downloaded</string>
+
+	<string name="notice_data_not_yet_downloaded">Data not yet downloaded.\n\nYou can swipe to refresh and retry.</string>
+
+	<!-- Home -->
+	<eat-comment />
+
+	<string name="home_activity_label">Pletoon Test by Jason</string>
+
+	<string-array name="section_days">
+		<item>Monday</item>
+		<item>Tuesday</item>
+		<item>Wednesday</item>
+		<item>Thursday</item>
+		<item>Friday</item>
+	</string-array>
+
+	<!-- Comic -->
+	<eat-comment />
+
+	<string name="comic_x_episodes_dot_category">%1$s episodes &#8226; %2$s</string>
+
+</resources>

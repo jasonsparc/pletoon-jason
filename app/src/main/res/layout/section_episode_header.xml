@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+		<variable name="episode" type="com.jasonsparc.pletoon.model.Episode" />
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/margin_medium"
+		android:gravity="center"
+		android:orientation="vertical">
+
+		<android.support.v7.widget.CardView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:clipChildren="false"
+			android:foreground="?selectableItemBackground"
+			app:cardCornerRadius="8dp"
+			app:cardPreventCornerOverlap="false">
+
+			<TextView
+				android:layout_width="120dp"
+				android:layout_height="120dp"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:padding="@dimen/margin_medium"
+				android:text="@string/label_not_yet_downloaded"
+				android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+				android:textSize="12sp"
+				android:textStyle="bold" />
+
+			<com.makeramen.roundedimageview.RoundedImageView
+				android:layout_width="120dp"
+				android:layout_height="120dp"
+				app:imageUrl="@{episode.coverPictureImage}"
+				app:riv_corner_radius="8dp"
+				tools:src="@drawable/pdkt_sample_episode_cover_pic" />
+		</android.support.v7.widget.CardView>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingLeft="@dimen/margin_medium"
+			android:paddingRight="@dimen/margin_medium"
+			android:paddingTop="@dimen/margin_medium"
+			android:text="@{episode.title()}"
+			android:textAppearance="@style/TextAppearance.AppCompat.Title"
+			android:textSize="16sp"
+			tools:text="Episode 1" />
+	</LinearLayout>
+</layout>
