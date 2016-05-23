@@ -58,7 +58,7 @@ public class InterceptorsModule {
 	@Named(Q.LOGGING_INTERCEPTOR)
 	Interceptor providesLoggingInterceptor() {
 		AtomicHttpLoggingInterceptor logging = new AtomicHttpLoggingInterceptor();
-		logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+		logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 		return logging;
 	}
 }
