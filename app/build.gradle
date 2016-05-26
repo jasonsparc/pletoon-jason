@@ -3,8 +3,8 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda' // IMPORTANT: Must apply this plugin *last*
 
 android {
-	compileSdkVersion 23
-	buildToolsVersion "23.0.2"
+	compileSdkVersion 24
+	buildToolsVersion "24"
 
 	defaultConfig {
 		applicationId "com.jasonsparc.pletoon"
@@ -46,8 +46,6 @@ android {
 }
 
 retrolambda {
-	jdk System.getenv("JAVA8_HOME")
-	oldJdk System.getenv("JAVA7_HOME")
 //  defaultMethods false
 	incremental false
 }
@@ -68,14 +66,11 @@ dependencies {
 	// *** * ***
 
 	// Android Support Libraries
-	compile('com.android.support:support-v4:23.3.0') {
-		// in case of versions conflict '23.2.1' version of support-v4 wins:
-		force = true // this avoids referencing the unstable '24.0.0-alpha1' version of support-v4
-	}
-	compile 'com.android.support:design:23.3.0'
-	compile 'com.android.support:cardview-v7:23.3.0'
-	compile 'com.android.support:recyclerview-v7:23.3.0'
-	compile 'com.android.support:percent:23.3.0'
+	compile 'com.android.support:support-v4:24.1.0'
+	compile 'com.android.support:design:24.1.0'
+	compile 'com.android.support:cardview-v7:24.1.0'
+	compile 'com.android.support:recyclerview-v7:24.1.0'
+	compile 'com.android.support:percent:24.1.0'
 
 	// Architecture Support
 	// Okio, https://github.com/square/okio
@@ -116,9 +111,9 @@ dependencies {
 	/* Optionally for TypeAdapter support */
 	compile 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.1'
 	// AutoValue: Cursor Extension, https://github.com/gabrielittner/auto-value-cursor
-	apt 'com.gabrielittner.auto.value:auto-value-cursor:0.5.0-SNAPSHOT'
+	apt 'com.gabrielittner.auto.value:auto-value-cursor:0.5.0'
 	/* if you need the @ColumnName or @ColumnAdapter annotations also include this: */
-	compile 'com.gabrielittner.auto.value:auto-value-cursor-annotations:0.5.0-SNAPSHOT'
+	compile 'com.gabrielittner.auto.value:auto-value-cursor-annotations:0.5.0'
 
 	// Networking libraries
 	// OkHttp, http://square.github.io/okhttp/
